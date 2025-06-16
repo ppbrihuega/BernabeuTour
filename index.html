@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUK TUK ZERO - Guía Inteligente para Clientes v8.5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container fade-in">
+        <div id="form-container">
+             <h1 class="main-title">TUK TUK ZERO</h1>
+             <h2 class="route-name">Bernabéu, Milla de Oro y Eje Monumental</h2>
+            
+            <form id="guide-form">
+                <div class="mb-8">
+                    <h3 class="form-section-title"><i class="fas fa-user-check"></i>Perfil del Cliente</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="traveler-type" class="block text-sm font-medium mb-2 text-gray-600">Tipo de Viajeros</label>
+                            <select id="traveler-type" name="traveler-type" class="form-select">
+                                <option value="general">Grupo General</option>
+                                <option value="pareja">Dúo Dinámico (Pareja)</option>
+                                <option value="familia">Aventura Familiar</option>
+                                <option value="individual">Explorador Solitario</option>
+                                <option value="negocios">Misión de Negocios</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="nationality" class="block text-sm font-medium mb-2 text-gray-600">Nacionalidad</label>
+                            <select id="nationality" name="nationality" class="form-select">
+                                <option value="Española">Española</option>
+                                <option value="Italiana">Italiana</option>
+                                <option value="Portuguesa">Portuguesa</option>
+                                <option value="Francesa">Francesa</option>
+                                <option value="Alemana">Alemana</option>
+                                <option value="Estadounidense">EE.UU.</option>
+                                <option value="China">China</option>
+                                <option value="Mexicana">Mexicana</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Colombiana">Colombiana</option>
+                                <option value="Peruana">Peruana</option>
+                                <option value="Chilena">Chilena</option>
+                                <option value="Venezolana">Venezolana</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        ¡Generar Tour para Cliente!
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="guide-container" class="hidden">
+             <h2 id="guide-title">Ruta Personalizada del Cliente</h2>
+             <div id="translation-controls" class="hidden">
+                <span class="text-sm font-semibold mr-2">Idioma:</span>
+                <button class="btn-lang active" data-lang="es">🇪🇸 ES</button>
+                <button class="btn-lang" data-lang="en">🇬🇧 EN</button>
+                <button class="btn-lang" data-lang="fr">🇫🇷 FR</button>
+                <button class="btn-lang" data-lang="de">🇩🇪 DE</button>
+                <button class="btn-lang" data-lang="it">🇮🇹 IT</button>
+                <button class="btn-lang" data-lang="pt">🇵🇹 PT</button>
+                <button class="btn-lang" data-lang="zh">🇨🇳 ZH</button>
+                <button class="btn-lang" data-lang="pl">🇵🇱 PL</button>
+                <button class="btn-lang" data-lang="ru">🇷🇺 RU</button>
+                <button class="btn-lang" data-lang="ja">🇯🇵 JA</button>
+                <button class="btn-lang" data-lang="nl">🇳🇱 NL</button>
+                <button class="btn-lang" data-lang="ar">🇸🇦 AR</button>
+            </div>
+            <div id="audio-controls" class="audio-controls">
+                 <p id="speech-support-msg" class="w-full text-sm text-red-500 mb-2 text-center hidden">Tu navegador no soporta la síntesis de voz.</p>
+                 <button id="play-button" class="btn-audio btn-play" title="Reproducir Tour Completo" disabled><i class="fas fa-play"></i> Play Tour</button>
+                 <button id="pause-button" class="btn-audio btn-pause" title="Pausar" disabled><i class="fas fa-pause"></i> Pausa</button>
+                 <button id="stop-button" class="btn-audio btn-stop" title="Detener" disabled><i class="fas fa-stop"></i> Stop</button>
+            </div>
+            <div id="guide-content"></div>
+            <div class="text-center mt-10">
+                <button id="reset-button" class="btn btn-primary" style="background: linear-gradient(45deg, #718096, #4a5568);">
+                    <i class="fas fa-undo"></i>
+                    Preparar Nuevo Tour
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
