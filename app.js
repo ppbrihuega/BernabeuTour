@@ -1,6 +1,10 @@
 // --- DATOS PARA PERSONALIZACIÓN ---
 const personalizationData = {
     saludos: {
+        Polaca: "Dzień dobry! Jak miło was widzieć! Wsiadajcie do Tuk-Tuka, zaczynamy wspaniałą wycieczkę po Madrycie!",
+        Rusa: "Здравствуйте! Очень рад вас видеть! Садитесь в Тук-Тук, мы начинаем увлекательную прогулку по Мадриду!",
+        Japonesa: "こんにちは！マドリードへようこそ！トゥクトゥクに乗って、素晴らしいツアーを始めましょう！",
+        Neerlandesa: "Hallo! Wat leuk jullie hier te hebben! Stap in de Tuk-Tuk, we beginnen aan een geweldige tour door Madrid!",
         Mexicana: "¡Órale, qué padre que andan por acá! Súbanse al Tuk-Tuk, ¡vamos a darle una vuelta chida por Madrid!",
         Argentina: "¡Che, qué bueno tenerlos! ¿Todo en orden? ¡Mandale mecha que arrancamos el Tuk-Tuk por Madrí!",
         Colombiana: "¡Quiubo, parceros! ¿Todo bien? ¡Acomódense en el Tuk-Tuk que nos vamos de ruta bacana por Madrid!",
@@ -9,6 +13,10 @@ const personalizationData = {
         default: "¡Hola! Bienvenidos a Madrid desde mi Tuk-Tuk. Soy su guía particular y estoy listo para empezar."
     },
     despedidas: {
+        Polaca: "Do zobaczenia! Mam nadzieję, że wycieczka się podobała. Bawcie się dobrze w Madrycie!",
+        Rusa: "До свидания! Надеюсь, вам понравился тур. Наслаждайтесь Мадридом!",
+        Japonesa: "ありがとうございました！マドリードでの滞在を楽しんでください！",
+        Neerlandesa: "Tot ziens! Ik hoop dat jullie van de tour genoten hebben. Veel plezier nog in Madrid!",
         Mexicana: "¡Ahí nos vidrios! Espero que les haya latido el tour. ¡A echar mucho ambiente!",
         Argentina: "¡Bueno, un gustazo! Espero que les haya copado Madrid. ¡A disfrutar!",
         Colombiana: "¡Listo, todo bien! Espero que la hayan pasado una chimba. ¡Nos pillamos!",
@@ -167,11 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             utterance.onend = () => {
                 removeHighlighting();
-                if (this.isPlaying && !this.isPaused) { 
-                    this.currentIndex++;
-                    this.speakCurrentUtterance();
-                } else if (!this.isPlaying) {
-                    this.stop(true);
+                if (this.isPlaying && !this.isPaused) {
+                    // Si no es el último elemento, esperar 2 segundos antes de continuar
+                    if (this.currentIndex < this.utteranceQueue.length - 1) {
+                        setTimeout(() => {
+                            this.currentIndex++;
+                            this.speakCurrentUtterance();
+                        }, 2000); // 2 segundos de pausa
+                    } else {
+                        // Si es el último, simplemente detener
+                        this.stop(true);
+                    }
                 }
             };
 
@@ -181,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             // Mapeo de códigos de idioma para la API de voz
-            const langCode = { en: 'en-US', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT', pt: 'pt-PT', zh: 'zh-CN', pl: 'pl-PL', ru: 'ru-RU', ja: 'ja-JP', nl: 'nl-NL', ar: 'ar-SA' }[currentLanguage] || 'es-ES';
+            const langCode = { en: 'en-US', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT', pt: 'pt-PT', zh: 'zh-CN', pl: 'pl-PL', ru: 'ru-RU', ja: 'ja-JP', nl: 'nl-NL' }[currentLanguage] || 'es-ES';
             utterance.lang = langCode;
             
             // Intentar encontrar una voz que coincida exactamente
@@ -380,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function translateContentStore(targetLang) {
         if (contentStore.segments[0].title[targetLang]) return;
 
-        const langName = {en: "English", fr: "French", de: "German", it: "Italian", pt: "Portuguese", zh: "Chinese", pl: "Polish", ru: "Russian", ja: "Japanese", nl: "Dutch", ar: "Arabic"}[targetLang];
+        const langName = {en: "English", fr: "French", de: "German", it: "Italian", pt: "Portuguese", zh: "Chinese", pl: "Polish", ru: "Russian", ja: "Japanese", nl: "Dutch"}[targetLang];
         const toTranslate = [];
 
         const labels = { historia: "Historia Rápida", anecdota: "Anécdota", curiosidad: "Curiosidad", ia: "Dato de la IA", fin: "Fin del Recorrido"};
